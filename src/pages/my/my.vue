@@ -1,11 +1,15 @@
 <template>
 	<view class="container">
         <view class="content-header">
+        <!--
             <view>
                 <image mode="widthFix" src="/static/logo.png"></image>
                 <text>你好啊</text>
             </view>
-           
+            -->
+           <view>
+                <button type="default" class="btn-login">立即登录</button>
+           </view>
         </view>
 		<view class="content-center">
             <uni-list>
@@ -46,22 +50,25 @@ import uniList from '../../components/uni-list/uni-list.vue'
 	.content-header{
         width: 100%;
         height: 250rpx;
-        border: 1px solid red;
     }
-    .content-header view{
-        width: 150rpx;
-        margin: 20rpx auto;
+    .btn-login{
+        width: 300rpx;
+        height: 100rpx;
+        margin-top: 40rpx;
     }
+    
     .content-header view image{
-        width:100rpx;
+        width:120rpx;
         border-radius: 100%;
+        height: 130rpx;
+        margin-top: 10rpx;
+        margin-left: 314rpx;
         float: left;
     }
     .content-header view text{
-        width: 100rpx;
-        text-align: center;
         float: left;
-        border: 1px solid red;
+        width: 100%;
+        text-align: center;
     }
     
 </style>
