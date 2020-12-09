@@ -25,19 +25,6 @@ const utils ={
     },
     
     
-    //获取当地地理位置
-    getLocation: function() {
-		return new Promise(function(resolve, reject) {
-			uni.getLocation({
-            type:"gcj02",
-              complete: (res) => {},
-              fail: (res) => {},
-              highAccuracyExpireTime: 0,
-              isHighAccuracy: true,
-              success: (result) => {},
-              type: 'type',
-            })
-		});
-	}
+   
 
 }

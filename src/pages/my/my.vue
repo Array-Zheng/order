@@ -8,7 +8,7 @@
             </view>
             -->
            <view>
-                <button type="default" class="btn-login">立即登录</button>
+                <button open-type="getUserInfo" @getuserinfo="decryptUserInfo" type="default" class="btn-login">立即登录</button>
            </view>
         </view>
 		<view class="content-center">
@@ -32,14 +32,17 @@ import uniList from '../../components/uni-list/uni-list.vue'
   components: { uniList },
 		data() {
 			return {
-				
+				userInfo:{}
 			}
 		},
 		onLoad() {
 
 		},
 		methods: {
-
+            decryptUserInfo(e){
+                this.userInfo=e.detail;
+                console.log(this.userInfo);
+            }
         }
        
 	}
