@@ -1,9 +1,15 @@
 <template>
-	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view>
-			<text class="title">{{title}}</text>
-		</view>
+	<view class="container">
+        <view class="content-header">
+            <view>
+                <image mode="widthFix" src="/static/logo.png"></image>
+                <text>小然然</text>
+            </view>
+           
+        </view>
+		<view class="content-center">
+        
+        </view>
 	</view>
 </template>
 
@@ -11,7 +17,7 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				
 			}
 		},
 		onLoad() {
@@ -24,26 +30,29 @@
 </script>
 
 <style>
-	.content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin: 200rpx auto 50rpx auto;
-	}
-
-	.text-area {
-		display: flex;
-		justify-content: center;
-	}
-
-	.title {
-		font-size: 36rpx;
-		color: #8f8f94;
-	}
+    
+	.content-header{
+        width: 100%;
+        height: 250rpx;
+        border: 1px solid red;
+    }
+    .content-header view{
+        width: 150rpx;
+        margin: 20rpx auto;
+    }
+    .content-header view image{
+        width:100rpx;
+        border-radius: 100%;
+        float: left;
+    }
+    .content-header view text{
+        width: 100rpx;
+        text-align: center;
+        float: left;
+        border: 1px solid red;
+    }
+    .content-center{
+        width: 100%;
+        height: 120rpx;
+    }
 </style>
