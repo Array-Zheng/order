@@ -32,16 +32,20 @@ import uniList from '../../components/uni-list/uni-list.vue'
   components: { uniList },
 		data() {
 			return {
-				userInfo:{}
+				
 			}
 		},
 		onLoad() {
-
+            
 		},
 		methods: {
             decryptUserInfo(e){
-                this.userInfo=e.detail;
-                console.log(this.userInfo);
+                const {userInfo}=e.detail;
+                uni.setStorageSync("userinfo", userInfo);
+                console.log(userInfo);
+                uni.navigateBack({
+                    delta: 0
+                 });
             }
         }
        
