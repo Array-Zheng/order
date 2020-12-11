@@ -1,14 +1,14 @@
 <template>
 	<view class="container">
         <view class="content-header">
-        <!--
-            <view>
-                <image mode="widthFix" src="/static/logo.png"></image>
-                <text>你好啊</text>
+            <view v-if="avatarUrl">
+                <image mode="widthFix" :src="avatarUrl"></image>
+                <text>{{nickName}}</text>
             </view>
-            -->
-           <view>
-                <button open-type="getUserInfo" @getuserinfo="decryptUserInfo" type="default" class="btn-login">立即登录</button>
+           <view v-else>
+                <button class='bottom' type='primary' open-type="getUserInfo" withCredentials="true" lang="zh_CN" @click="login()">
+                    立即登录
+                </button>
            </view>
         </view>
 		<view class="content-center">
@@ -32,21 +32,136 @@ import uniList from '../../components/uni-list/uni-list.vue'
   components: { uniList },
 		data() {
 			return {
-				
+				SessionKey: '',
+                OpenId: '',
+                nickName: null,
+                avatarUrl: null,
+                isCanUse: uni.getStorageSync('isCanUse')||true//默认为true
 			}
 		},
 		onLoad() {
             
 		},
 		methods: {
-            decryptUserInfo(e){
-                const {userInfo}=e.detail;
-                uni.setStorageSync("userinfo", userInfo);
-                console.log(userInfo);
-                uni.navigateBack({
-                    delta: 0
-                 });
+            // decryptUserInfo(e){
+            //     const {userInfo}=e.detail;
+            //     uni.setStorageSync("userinfo", userInfo);
+            //     console.log(userInfo);
+            //     uni.navigateBack({
+            //         delta: 0
+            //      });
+            // }
+            //第一授权获取用户信息===》按钮触发
+            
+
+            // wxGetUserInfo() {
+            //     let _this = this;
+            //     uni.login({
+            //         success: function(res)  {
+            //              uni.getUserInfo({
+            //         provider: 'weixin',
+            //         success: function(infoRes) {
+            //             console.log(infoRes);
+            //             let nickName = infoRes.userInfo.nickName; //昵称
+            //             let avatarUrl = infoRes.userInfo.avatarUrl; //头像
+            //             try {
+            //                 uni.setStorageSync('isCanUse', false);//记录是否第一次授权  false:表示不是第一次授权
+            //                 _this.updateUserInfo();
+            //             } catch (e) {}
+            //         },
+            //         fail(res) {}
+            //     });
+            //         },fail(res){
+
+            //         }
+            //     })
+               
+            // },
+
+            // wxGetUserInfo() {
+            //     let _this = this;
+            //     uni.showModal({
+            //         title: '申请获取以下权限',
+            //         content: '获得你的公开信息(昵称，头像、地区等)',
+            //         success: function (res) {
+            //             if (res.confirm) {
+            //                 console.log('用户点击确定');
+            //                 uni.getUserInfo({
+            //                 provider: 'weixin',
+            //                 success: function(infoRes) {
+            //                     console.log(infoRes);
+            //                     _this.nickName = infoRes.userInfo.nickName; //昵称
+            //                     _this.avatarUrl = infoRes.userInfo.avatarUrl; //头像
+            //                     try {
+            //                         uni.setStorageSync('isCanUse', false);//记录是否第一次授权  false:表示不是第一次授权
+            //                         _this.updateUserInfo();
+            //                     } catch (e) {}
+            //                 },
+            //                 fail(res) {}
+            //             });
+            //             } else if (res.cancel) {
+            //                 console.log('用户点击取消');
+            //             }
+            //         }
+            //     });
+            // }
+            // 1.wx获取登录用户code
+            login(){
+                let _this = this;
+                
+                uni.showModal({
+                    title: '申请获取以下权限',
+                    content: '获得你的公开信息(昵称，头像、地区等)',
+                    success: function (res) {
+                        if (res.confirm) {
+                            uni.showLoading({
+                                title: '登录中...'
+                            });
+                            console.log('用户点击确定');
+                            uni.login({
+                                provider: 'weixin',
+                                success: function(loginRes) {
+                                    let code = loginRes.code;
+                                    if (!_this.isCanUse) {
+                                        //非第一次授权获取用户信息
+                                        uni.getUserInfo({
+                                            provider: 'weixin',
+                                            success: function(infoRes) {
+            　　　　　　　　　　　　　　　　　　　　　　//获取用户信息后向调用信息更新方法
+                                                _this.nickName = infoRes.userInfo.nickName; //昵称
+                                                _this.avatarUrl = infoRes.userInfo.avatarUrl; //头像
+                                            }
+                                        });
+                                    }
+                        
+                                    //2.将用户登录code传递到后台置换用户SessionKey、OpenId等信息
+                                    uni.request({
+                                        url: '服务器地址',
+                                        data: {
+                                            code: code,
+                                        },
+                                        method: 'GET',
+                                        header: {
+                                            'content-type': 'application/json'
+                                        },
+                                        success: (res) => {
+                                            //openId、或SessionKdy存储
+                                            
+                                            //隐藏loading
+                                            uni.hideLoading();
+                                        }
+                                    });
+                                },
+                            });
+
+                        } else if (res.cancel) {
+                            console.log('用户点击取消');
+                        }
+                    }
+                });
             }
+
+
         }
        
 	}
@@ -58,12 +173,13 @@ import uniList from '../../components/uni-list/uni-list.vue'
         width: 100%;
         height: 250rpx;
     }
-    .btn-login{
-        width: 300rpx;
-        height: 100rpx;
-        margin-top: 40rpx;
+
+    .bottom {
+        border-radius: 80rpx;
+        margin: 70rpx auto;
+        font-size: 35rpx;
+        width: 200rpx;
     }
-    
     .content-header view image{
         width:120rpx;
         border-radius: 100%;

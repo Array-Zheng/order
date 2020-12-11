@@ -9,7 +9,7 @@
     		<view>
         		距离您{{distance}}千米
     		</view>
-    		<navigator class="distance_nav" url="" hover-class="navigator-hover" open-type="navigate">
+    		<navigator class="distance_nav" url="../shopInfo/shopInfo" hover-class="navigator-hover" open-type="navigate">
         		<view>
            	 		查看门店信息<uni-icons type="forward" size="30rpx"></uni-icons>
         		</view> 
