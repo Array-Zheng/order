@@ -27,6 +27,7 @@
 
 <script>
 import uniList from '../../components/uni-list/uni-list.vue'
+const api = require('@/utils/api.js');
     //导入列表组件
 	export default {
   components: { uniList },
@@ -37,6 +38,7 @@ import uniList from '../../components/uni-list/uni-list.vue'
                 nickName: null,
                 avatarUrl: null,
                 isCanUse: uni.getStorageSync('isCanUse')||true//默认为true
+               
 			}
 		},
 		onLoad() {
@@ -108,6 +110,7 @@ import uniList from '../../components/uni-list/uni-list.vue'
             // 1.wx获取登录用户code
             login(){
                 let _this = this;
+                let  code='';
                 
                 uni.showModal({
                     title: '申请获取以下权限',
@@ -121,13 +124,14 @@ import uniList from '../../components/uni-list/uni-list.vue'
                             uni.login({
                                 provider: 'weixin',
                                 success: function(loginRes) {
-                                    let code = loginRes.code;
-                                    if (!_this.isCanUse) {
+                                     _this.code = loginRes.code;
+                                    console.log(_this.code)
+                                    if (_this.isCanUse) {
                                         //非第一次授权获取用户信息
                                         uni.getUserInfo({
                                             provider: 'weixin',
                                             success: function(infoRes) {
-            　　　　　　　　　　　　　　　　　　　　　　//获取用户信息后向调用信息更新方法
+            　　　　　　　　　　　　　　　　　　　　//获取用户信息后向调用信息更新方法
                                                 console.log(infoRes);
                                                 _this.nickName = infoRes.userInfo.nickName; //昵称
                                                 _this.avatarUrl = infoRes.userInfo.avatarUrl; //头像
@@ -137,9 +141,9 @@ import uniList from '../../components/uni-list/uni-list.vue'
                         
                                     //2.将用户登录code传递到后台置换用户SessionKey、OpenId等信息
                                     uni.request({
-                                        url: '服务器地址',
+                                        url: api.localUrl+'user/login',
                                         data: {
-                                            code: code,
+                                            code: _this.code, 
                                         },
                                         method: 'GET',
                                         header: {
@@ -147,7 +151,10 @@ import uniList from '../../components/uni-list/uni-list.vue'
                                         },
                                         success: (res) => {
                                             //openId、或SessionKdy存储
-                                            
+                                            _this.OpenId=res.openid
+                                            console.log(res.data.openid);
+                                            uni.setStorageSync("openid",res.data.openid);
+                                            console.log(res)
                                             //隐藏loading
                                             uni.hideLoading();
                                         }

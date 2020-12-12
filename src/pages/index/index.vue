@@ -19,7 +19,7 @@
 		<view class="shop">
 			<!-- 左侧菜单 -->
 			<scroll-view scroll-y class="left_menu">
-				<view class="menu_item {{index===currentIndex?'active':''}}">
+				<view class="menu_item">
 					gfsd
 				</view>
 			</scroll-view>
@@ -79,7 +79,8 @@
 				longitude2:113.2414,
 				distance:0 , //与门店的距离
 				//门店地位名称
-				shopPosition:"江高店（亿达广场商场3楼）"
+				shopPosition:"江高店（亿达广场商场3楼）",
+				openid:''
 			}
 		},
 		onLoad() {

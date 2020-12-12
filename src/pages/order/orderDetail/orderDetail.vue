@@ -32,17 +32,38 @@
 
 <script>
 	import uniCard from '@/components/uni-card/uni-card.vue'
+	const api = require('@/utils/api.js');
 	export default {
 		data() {
 			return {
-				title: '订单编号：'
+				title: '订单编号：',
+				getOrderDetail:{},
+				openid:''
 			}
 		},
 		onLoad() {
-
+			this.getDetail()
 		},
 		methods: {
-
+			getDetail(){
+				let _this=this;
+				this.openid=uni.getStorageSync("openid");
+				uni.request({
+                            url: api.localUrl+'OrderMaster/getOpenIdOrOrderIdAll',
+                                data: {
+									orderId:_this.orderId
+                                },
+								method: 'POST',
+                                header: {
+                                    'content-type': 'application/json'
+                                },
+                                success: (res) => {
+                                     _this.getOrderDetail=res.data
+                                    console.log(getOrderDetail)
+                                     }
+                         });
+			}
+			}
 		},
 		components: {uniCard}
 		

@@ -1,32 +1,56 @@
 <template>
 	<view class="content">
+	<view v-for="(item, index) in getFinshOrder" :key="index">
 		<view class="order_card">
 			<view class="order-content">
-				<text>订单编号：</text>
-				<text>下单时间：</text>
+				<text>订单编号：{{item.orderId}}</text>
+				<text>下单时间：{{item.createTime}}</text>
 			</view>	
-			<view class="beizhu">备注：</view>
+			<view class="beizhu">备注：{{item.orderRemark}}</view>
 		</view>
 		<view class="order-btn">
 				<button type='primary'>确认送达</button>
 				<button type="warn">详情</button>
 		</view>
 	</view>
+	</view>
 </template>
 
 <script>
 	import uniCard from '@/components/uni-card/uni-card.vue'
+	const api = require('@/utils/api.js');
 	export default {
 		data() {
 			return {
-				
+				//待取餐的订单
+				getFinshOrder:[],
+				openid:''
 			}
 		},
 		onLoad() {
-
+			this.getOrder();
 		},
 		methods: {
-
+			getOrder(){
+				let _this=this;
+				this.openid=uni.getStorageSync("openid");
+				uni.request({
+                            url: api.localUrl+'OrderMaster/selectList',
+                                data: {
+									buyerOpenid: _this.openid, 
+									payStatus:0
+                                },
+								method: 'POST',
+                                header: {
+                                    'content-type': 'application/json'
+                                },
+                                success: (res) => {
+                                     _this.getFinshOrder=res.data
+                                    console.log(res)
+                                     }
+                         });
+			}
+			
 		},
 		components: {uniCard}
 	}
@@ -48,6 +72,7 @@
 		width: 100%;
 		float: left;
 		font-size: 30rpx;
+		margin-bottom: 20rpx;
 	}
 	.beizhu{
 		font-size: 30rpx;
