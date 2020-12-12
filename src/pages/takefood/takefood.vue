@@ -1,17 +1,25 @@
 <template>
 	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view>
-			<text class="title">{{title}}</text>
+		<view class="order_card">
+			<view class="order-content">
+				<text>订单编号：</text>
+				<text>下单时间：</text>
+			</view>	
+			<view class="beizhu">备注：</view>
+		</view>
+		<view class="order-btn">
+				<button type='primary'>确认送达</button>
+				<button type="warn">详情</button>
 		</view>
 	</view>
 </template>
 
 <script>
+	import uniCard from '@/components/uni-card/uni-card.vue'
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				
 			}
 		},
 		onLoad() {
@@ -19,31 +27,43 @@
 		},
 		methods: {
 
-		}
+		},
+		components: {uniCard}
 	}
 </script>
 
 <style>
-	.content {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
+	.content{
+		width: 100%;
+		margin: 20rpx;	
+		padding: 0;
 	}
-
-	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin: 200rpx auto 50rpx auto;
+	.order_card{
+		width: 100%;
+		border-bottom: 1px solid rgb(238, 232, 232);
+		padding: 10rpx;
+		margin-top: 10rpx;
 	}
-
-	.text-area {
-		display: flex;
-		justify-content: center;
+	.order-content text{
+		width: 100%;
+		float: left;
+		font-size: 30rpx;
 	}
-
-	.title {
-		font-size: 36rpx;
-		color: #8f8f94;
+	.beizhu{
+		font-size: 30rpx;
+	}
+	.order-btn{
+		border-bottom: 1px solid rgb(238, 232, 232);
+		float: left;
+		width: 100%;
+		padding: 10rpx;
+	}
+	.order-btn button{
+		width: 180rpx;
+		float: right;
+		font-size: 25rpx;
+		margin-right: 40rpx;
+		padding-bottom: 10rpx;
+		border-radius: 80rpx;
 	}
 </style>

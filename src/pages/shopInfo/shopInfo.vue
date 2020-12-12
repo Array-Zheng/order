@@ -62,6 +62,7 @@
     }
     .shop_image image{
         height: 100%;
+        width: 100%;
     }
 	
     

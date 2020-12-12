@@ -128,6 +128,7 @@ import uniList from '../../components/uni-list/uni-list.vue'
                                             provider: 'weixin',
                                             success: function(infoRes) {
             　　　　　　　　　　　　　　　　　　　　　　//获取用户信息后向调用信息更新方法
+                                                console.log(infoRes);
                                                 _this.nickName = infoRes.userInfo.nickName; //昵称
                                                 _this.avatarUrl = infoRes.userInfo.avatarUrl; //头像
                                             }

@@ -15,12 +15,59 @@
         		</view> 
     		</navigator>
 		</view>
+		<!--商品展示-->
+		<view class="shop">
+			<!-- 左侧菜单 -->
+			<scroll-view scroll-y class="left_menu">
+				<view class="menu_item {{index===currentIndex?'active':''}}">
+					gfsd
+				</view>
+			</scroll-view>
+			<!-- 右侧商品内容 -->
+			<scroll-view :scroll-top="scrollTop" scroll-y class="right_content">
+				<view class="index_swiper">
+					<!-- 
+					1 swiper标签存在默认的宽度和高度
+						100% * 150px 
+					2 image标签也存在默认的宽度和高度
+						320px * 240px 
+					3 设计图片和轮播图
+						1 先看一下原图的宽高  750 * 340 
+						2 让图片的高度自适应 宽度 等于100%
+						3 让swiper标签的高度 变成和图片的高一样即可 
+					4 图片标签
+						mode属性 渲染模式
+						widthFix  让图片的标签宽高 和 图片标签的内容的宽高都等比例的发生变化 
+					-->
+					<swiper autoplay indicator-dots circular>
+						<swiper-item>
+							<navigator url="">
+								<image mode="scaleToFill" src="/static/images/shopInfo.jpg"></image>
+							</navigator>
+						</swiper-item>
+						<swiper-item>
+							<navigator url="">
+								<image mode="scaleToFill" src="/static/images/shopInfo.jpg"></image>
+							</navigator>
+						</swiper-item>
+					</swiper>
+				</view>
+				<view class="goods_list">
+					<navigator>
+						<image mode="scaleToFill" src="/static/images/shopInfo.jpg"></image>
+						<view class="goods_name">好东西</view>
+						<view class="goods_btn"><button type="warn">选规格</button></view>
+					</navigator>
+				</view>
+			</scroll-view>
+		</view>
 	</view>
 </template>
 
 <script>
 	import uniNoticeBar from '@/components/uni-notice-bar/uni-notice-bar.vue'
 	import uniIcons from "@/components/uni-icons/uni-icons.vue"
+	import uniSwiperDot from "@/components/uni-swiper-dot/uni-swiper-dot.vue"
 	const util = require("@/utils/util.js")
 	export default {
 		data() {
@@ -81,12 +128,19 @@
 		},
 		components: {
 			uniNoticeBar,
-			uniIcons
+			uniIcons,
+			uniSwiperDot
 		}
 	}
 </script>
 
 <style>
+	page{
+		height: 100%;
+	}
+	.content{
+		height: 100%;
+	}
 	.shop_position{
 		height: 70rpx;
 		line-height: 70rpx;
@@ -108,5 +162,70 @@
     	line-height: 70px;
     	margin-right: 20rpx;
 	}
+	.shop{
+		height: 75%;
+		width: 100%;
+		margin-top: 20rpx;
+	}
 
+	.left_menu{
+		width: 200rpx;
+		float: left;
+		height: 100%;
+		background-color:  rgb(250, 244, 244);
+	}
+	.left_menu view{
+		height: 80rpx;
+		line-height: 80rpx;
+		text-align: center;
+		font-size: 30rpx;
+	}
+	.right_content{
+		width: 518rpx;
+		float: left;
+		height: 100%;
+		margin-left: 30rpx;
+		background-color: rgb(250, 244, 244);
+	}
+	.index_swiper{
+		width: 100%;
+	}
+	
+	.index_swiper swiper,.index_swiper swiper swiper-item navigator image{
+		width: 100%;
+		height: 220rpx;
+	}
+	.goods_list{
+		width: 100%;
+		height: 150rpx;
+		padding: 20rpx;
+		margin-top: 20rpx;
+		border: 1px solid rgb(239, 235, 243);
+	}
+	.goods_list navigator image{
+		margin-top:30rpx;
+		height: 100rpx;
+		width: 120rpx;
+		border-radius: 20rpx;
+	}
+	.goods_list navigator image,.goods_name,.goods_btn{
+		float: left;
+	}
+	.goods_name{
+		width: 200rpx;
+		height: 150rpx;
+		line-height: 150rpx;
+		font-size: 30rpx;
+		padding-left: 20rpx;
+	}
+	.goods_btn{
+		width: 168rpx;
+	}
+	.goods_btn button{
+		width: 138rpx;
+		font-size: 25rpx;
+		border-radius: 30rpx;
+		margin-top: 35rpx;
+		padding-right: 30rpx;
+	}
 </style>
