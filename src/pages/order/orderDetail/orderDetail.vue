@@ -38,7 +38,7 @@
 			return {
 				title: '订单编号：',
 				getOrderDetail:{},
-				openid:''
+				orderId:''
 			}
 		},
 		onLoad() {
@@ -63,10 +63,9 @@
                                      }
                          });
 			}
-			}
+			
 		},
 		components: {uniCard}
-		
 	}
 </script>
 
