@@ -202,6 +202,7 @@
 		padding: 20rpx;
 		margin-top: 20rpx;
 		border: 1px solid rgb(239, 235, 243);
+		
 	}
 	.goods_list navigator image{
 		margin-top:30rpx;

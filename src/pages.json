@@ -40,12 +40,26 @@
         {
             "path": "pages/address/addAddress/addAddress",
             "style": {
-                "navigationBarTitleText": "新增地址",
-                "navigationStyle": "custom"
+                "navigationBarTitleText": "新增地址"
+
+            }
+        },
+        {
+            "path": "pages/address/addAddress/addressAdd",
+            "style": {
+                "navigationBarTitleText": "新增地址"
+
             }
         },
         {
             "path": "pages/address/showAddress/showAddress",
+            "style": {
+                "navigationBarTitleText": "收货地址"
+
+            }
+        },
+        {
+            "path": "pages/address/updateAddress/updateAddress",
             "style": {
                 "navigationBarTitleText": "收货地址"
 

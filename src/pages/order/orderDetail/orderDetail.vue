@@ -38,20 +38,20 @@
 			return {
 				title: '订单编号：',
 				getOrderDetail:{},
-				orderId:''
 			}
 		},
-		onLoad() {
-			this.getDetail()
+		onLoad(option) {
+			this.getDetail(option.orderId)
 		},
 		methods: {
-			getDetail(){
+			getDetail(orderId){
 				let _this=this;
+				console.log(orderId);
 				this.openid=uni.getStorageSync("openid");
 				uni.request({
                             url: api.localUrl+'OrderMaster/getOpenIdOrOrderIdAll',
                                 data: {
-									orderId:_this.orderId
+									orderId:orderId
                                 },
 								method: 'POST',
                                 header: {

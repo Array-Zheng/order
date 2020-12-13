@@ -17,7 +17,7 @@
                 <uni-list-item thumb="/static/images/shouchang.png" :showArrow="true" title="我的收藏" ></uni-list-item>
                 <uni-list-item thumb="/static/images/youhui.png" :showArrow="true"  title="优惠买单" ></uni-list-item>
                 <uni-list-item thumb="/static/images/dingdan.png" :showArrow="true" title="全部订单" ></uni-list-item>
-                <uni-list-item thumb="/static/images/address.png" :showArrow="true"  title="收货地址" ></uni-list-item>
+                <uni-list-item thumb="/static/images/address.png" @click="toAddress()" :clickable="true" :showArrow="true"  title="收货地址" ></uni-list-item>
                 <uni-list-item thumb="/static/images/kefu.png" :showArrow="true"  title="联系商家" ></uni-list-item>
                 <uni-list-item thumb="/static/images/women.png" :showArrow="true" title="关于我们" ></uni-list-item>
             </uni-list>
@@ -154,6 +154,8 @@ const api = require('@/utils/api.js');
                                             _this.OpenId=res.openid
                                             console.log(res.data.openid);
                                             uni.setStorageSync("openid",res.data.openid);
+                                           
+                                           
                                             console.log(res)
                                             //隐藏loading
                                             uni.hideLoading();
@@ -167,6 +169,22 @@ const api = require('@/utils/api.js');
                         }
                     }
                 });
+            },
+
+            toAddress(){
+                let _this=this;
+                console.log(_this.OpenId)
+                if(_this.OpenId==''){
+                   uni.showToast({
+						title: '请先登录',
+						duration: 2000
+					});
+                }else{
+                    uni.navigateTo({
+					    url:"/pages/address/showAddress/showAddress"
+				})
+                }
+               
             }
 
 

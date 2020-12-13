@@ -10,7 +10,7 @@
 		</view>
 		<view class="order-btn">
 				<button type='primary'>确认送达</button>
-				<button type="warn">详情</button>
+				<button type="warn" @click="toOrderDetail(item.orderId)">详情</button>
 		</view>
 	</view>
 	</view>
@@ -33,8 +33,10 @@
 		methods: {
 			getOrder(){
 				let _this=this;
-				this.openid=uni.getStorageSync("openid");
-				uni.request({
+				_this.openid=uni.getStorageSync("openid");
+				console.log(_this.openid)
+				if(!_this.openid==''){
+					uni.request({
                             url: api.localUrl+'OrderMaster/selectList',
                                 data: {
 									buyerOpenid: _this.openid, 
@@ -49,6 +51,18 @@
                                     console.log(res)
                                      }
                          });
+				}else{
+					uni.showToast({
+						title: '请先登录',
+					});
+				}
+				
+			},
+			//跳转到详情页面
+			toOrderDetail(orderId){
+				uni.navigateTo({
+					url: '/pages/order/orderDetail/orderDetail?orderId='+orderId
+				});
 			}
 			
 		},
