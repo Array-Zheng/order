@@ -1,90 +1,92 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		
-		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "点餐"
-			}
-		},
-		{
-			"path": "pages/takefood/takefood",
-			"style": {
-				"navigationBarTitleText": "取餐"
-			}
-		},
-		{
-			"path": "pages/my/my",
-			"style": {
-				"navigationBarTitleText": "我的"
-			}
-		},
-		{
-			"path": "pages/date/date",
-			"style": {
-				"navigationBarTitleText": "签到日期"
-			}
-		},
-		{
-			"path": "pages/order/orderList/orderList",
-			"style": {
-				"navigationBarTitleText": "全部订单"
-			}
-		},
-		{
-			"path": "pages/order/orderDetail/orderDetail",
-			"style": {
-				"navigationBarTitleText": "订单详情"
-			}
-		},
-		{
-			"path": "pages/address/addAddress/addAddress",
-			"style": {
-				"navigationBarTitleText": "添加收货地址"
-			}
-		},
-		{
-			"path": "pages/address/showAddress/showAddress",
-			"style": {
-				"navigationBarTitleText": "收货地址"
-			}
-		},
-		{
-			"path": "pages/shopInfo/shopInfo",
-			"style": {
-				"navigationBarTitleText": "门店信息"
-			}
-		}
-	],
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "点餐小程序",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
-	},
-	"tabBar": {
-		"backgroundColor": "#fafafa",
-		"borderStyle": "white",
-		"selectedColor": "#b4282d",
-		"color": "#666",
-		"list": [{
-				"pagePath": "pages/index/index",
-				"iconPath": "static/images/index-off.png",
-				"selectedIconPath": "static/images/index-on.png",
-				"text": "点餐"
-			},
-			{
-				"pagePath": "pages/takefood/takefood",
-				"iconPath": "static/images/qc-off.png",
-				"selectedIconPath": "static/images/qc-on.png",
-				"text": "取餐"
-			},
-			{
-				"pagePath": "pages/my/my",
-				"iconPath": "static/images/my-off.png",
-				"selectedIconPath": "static/images/my-on.png",
-				"text": "我的"
-			}
-		]
-	}
+    "pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+
+        {
+            "path": "pages/index/index",
+            "style": {
+                "navigationBarTitleText": "点餐"
+            }
+        },
+        {
+            "path": "pages/takefood/takefood",
+            "style": {
+                "navigationBarTitleText": "取餐"
+            }
+        },
+        {
+            "path": "pages/my/my",
+            "style": {
+                "navigationBarTitleText": "我的"
+            }
+        },
+        {
+            "path": "pages/date/date",
+            "style": {
+                "navigationBarTitleText": "签到日期"
+            }
+        },
+        {
+            "path": "pages/order/orderList/orderList",
+            "style": {
+                "navigationBarTitleText": "全部订单"
+            }
+        },
+        {
+            "path": "pages/order/orderDetail/orderDetail",
+            "style": {
+                "navigationBarTitleText": "订单详情"
+            }
+        },
+        {
+            "path": "pages/address/addAddress/addAddress",
+            "style": {
+                "navigationBarTitleText": "新增地址",
+                "navigationStyle": "custom"
+            }
+        },
+        {
+            "path": "pages/address/showAddress/showAddress",
+            "style": {
+                "navigationBarTitleText": "收货地址"
+
+            }
+        },
+        {
+            "path": "pages/shopInfo/shopInfo",
+            "style": {
+                "navigationBarTitleText": "门店信息"
+            }
+        }
+    ],
+    "globalStyle": {
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "点餐小程序",
+        "navigationBarBackgroundColor": "#F8F8F8",
+        "backgroundColor": "#F8F8F8"
+    },
+    "tabBar": {
+        "backgroundColor": "#fafafa",
+        "borderStyle": "white",
+        "selectedColor": "#b4282d",
+        "color": "#666",
+        "list": [{
+                "pagePath": "pages/index/index",
+                "iconPath": "static/images/index-off.png",
+                "selectedIconPath": "static/images/index-on.png",
+                "text": "点餐"
+            },
+            {
+                "pagePath": "pages/takefood/takefood",
+                "iconPath": "static/images/qc-off.png",
+                "selectedIconPath": "static/images/qc-on.png",
+                "text": "取餐"
+            },
+            {
+                "pagePath": "pages/my/my",
+                "iconPath": "static/images/my-off.png",
+                "selectedIconPath": "static/images/my-on.png",
+                "text": "我的"
+            }
+        ]
+    }
 }
