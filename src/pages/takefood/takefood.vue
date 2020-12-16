@@ -9,7 +9,7 @@
 			<view class="beizhu">备注：{{item.orderRemark}}</view>
 		</view>
 		<view class="order-btn">
-				<button type='primary'>确认送达</button>
+				<button type='primary' @click="finshEat(item.orderId)">取餐</button>
 				<button type="warn" @click="toOrderDetail(item.orderId)">详情</button>
 		</view>
 	</view>
@@ -37,7 +37,7 @@
 				console.log(_this.openid)
 				if(!_this.openid==''){
 					uni.request({
-                            url: api.localUrl+'OrderMaster/selectList',
+                            url: api.localUrl+'orderMaster/selectList',
                                 data: {
 									buyerOpenid: _this.openid, 
 									payStatus:0
@@ -48,7 +48,7 @@
                                 },
                                 success: (res) => {
                                      _this.getFinshOrder=res.data
-                                    console.log(res)
+                                    console.log("shuju"+res)
                                      }
                          });
 				}else{
@@ -63,6 +63,34 @@
 				uni.navigateTo({
 					url: '/pages/order/orderDetail/orderDetail?orderId='+orderId
 				});
+			},
+			finshEat(orderId){
+				uni.request({
+                            url: api.localUrl+'orderMaster/updateById',
+                                data: {
+									orderId:orderId,
+									payStatus:1
+                                },
+								method: 'POST',
+                                header: {
+                                    'content-type': 'application/json'
+                                },
+                                success: (res) => {
+									uni.switchTab({
+										url: '/pages/takefood/takefood',
+										success(){
+											let page = getCurrentPages().pop(); //跳转页面成功之后
+											if (!page) return; 
+												page.onLoad(); //如果页面存在，则重新刷新页面
+											}
+									});
+                                    uni.showToast({
+										title:'取餐成功' 
+									})
+									
+                                     }
+						 });
+						 
 			}
 			
 		},
@@ -85,11 +113,11 @@
 	.order-content text{
 		width: 100%;
 		float: left;
-		font-size: 30rpx;
+		font-size: 25rpx;
 		margin-bottom: 20rpx;
 	}
 	.beizhu{
-		font-size: 30rpx;
+		font-size: 25rpx;
 	}
 	.order-btn{
 		border-bottom: 1px solid rgb(238, 232, 232);
@@ -98,7 +126,7 @@
 		padding: 10rpx;
 	}
 	.order-btn button{
-		width: 180rpx;
+		width: 130rpx;
 		float: right;
 		font-size: 25rpx;
 		margin-right: 40rpx;

@@ -28,13 +28,20 @@
         {
             "path": "pages/order/orderList/orderList",
             "style": {
-                "navigationBarTitleText": "全部订单"
+                "navigationBarTitleText": "全部订单",
+                "enablePullDownRefresh": true
             }
         },
         {
             "path": "pages/order/orderDetail/orderDetail",
             "style": {
                 "navigationBarTitleText": "订单详情"
+            }
+        },
+        {
+            "path": "pages/cart/cart",
+            "style": {
+                "navigationBarTitleText": "购物车"
             }
         },
         {
@@ -55,6 +62,13 @@
             "path": "pages/address/showAddress/showAddress",
             "style": {
                 "navigationBarTitleText": "收货地址"
+
+            }
+        },
+        {
+            "path": "pages/pay/pay",
+            "style": {
+                "navigationBarTitleText": "支付"
 
             }
         },

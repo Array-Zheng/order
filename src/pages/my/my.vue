@@ -1,7 +1,7 @@
 <template>
 	<view class="container">
         <view class="content-header">
-            <view v-if="avatarUrl">
+            <view v-if="avatarUrl" @click="loginOut()">
                 <image mode="widthFix" :src="avatarUrl"></image>
                 <text>{{nickName}}</text>
             </view>
@@ -13,10 +13,10 @@
         </view>
 		<view class="content-center">
             <uni-list>
-                <uni-list-item thumb="/static/images/qiandao.png" :showArrow="true"  title="每日签到" ></uni-list-item>
-                <uni-list-item thumb="/static/images/shouchang.png" :showArrow="true" title="我的收藏" ></uni-list-item>
+                <uni-list-item thumb="/static/images/qiandao.png" @click="toDate()" :clickable="true" :showArrow="true"  title="每日签到" ></uni-list-item>
+                <uni-list-item thumb="/static/images/shouchang.png" @click="toCart()" :clickable="true" :showArrow="true" title="我的购物" ></uni-list-item>
                 <uni-list-item thumb="/static/images/youhui.png" :showArrow="true"  title="优惠买单" ></uni-list-item>
-                <uni-list-item thumb="/static/images/dingdan.png" :showArrow="true" title="全部订单" ></uni-list-item>
+                <uni-list-item thumb="/static/images/dingdan.png" @click="toOrder()" :clickable="true" :showArrow="true" title="全部订单" ></uni-list-item>
                 <uni-list-item thumb="/static/images/address.png" @click="toAddress()" :clickable="true" :showArrow="true"  title="收货地址" ></uni-list-item>
                 <uni-list-item thumb="/static/images/kefu.png" :showArrow="true"  title="联系商家" ></uni-list-item>
                 <uni-list-item thumb="/static/images/women.png" :showArrow="true" title="关于我们" ></uni-list-item>
@@ -35,8 +35,8 @@ const api = require('@/utils/api.js');
 			return {
 				SessionKey: '',
                 OpenId: '',
-                nickName: null,
-                avatarUrl: null,
+                nickName: '',
+                avatarUrl: '',
                 isCanUse: uni.getStorageSync('isCanUse')||true//默认为true
                
 			}
@@ -185,6 +185,70 @@ const api = require('@/utils/api.js');
 				})
                 }
                
+            },
+            toOrder(){
+                let _this=this;
+                console.log(_this.OpenId)
+                if(_this.OpenId==''){
+                   uni.showToast({
+						title: '请先登录',
+						duration: 2000
+					});
+                }else{
+                    uni.navigateTo({
+					    url:"/pages/order/orderList/orderList"
+				})
+                }
+            },
+            toDate(){
+                let _this=this;
+                console.log(_this.OpenId)
+                if(_this.OpenId==''){
+                   uni.showToast({
+						title: '请先登录',
+						duration: 2000
+					});
+                }else{
+                    uni.navigateTo({
+					    url:"/pages/date/date"
+				})
+                }
+            },
+            toCart(){
+                let _this=this;
+                console.log(_this.OpenId)
+                if(_this.OpenId==''){
+                   uni.showToast({
+						title: '请先登录',
+						duration: 2000
+					});
+                }else{
+                    uni.navigateTo({
+					    url:"/pages/cart/cart"
+				})
+                }
+            },
+
+            //退出登录
+            loginOut(){
+                let _this=this
+                uni.showModal({
+                    title: '退出提示',
+                    content: '确定退出登录',
+                    success: function (res) {
+                        if (res.confirm) {
+                            _this.nickName= '';
+                            _this.avatarUrl= '';
+                            try {
+                                uni.removeStorageSync('openid');
+                            } catch (e) {
+                                // error
+                            }
+                        } else if (res.cancel) {
+                           
+                        }
+                    }
+                });
             }
 
 
